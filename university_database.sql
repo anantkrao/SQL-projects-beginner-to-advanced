@@ -37,7 +37,7 @@ create table instructor(
 ID numeric(4),
 name varchar2(255),
 dept_name varchar2(30),
-salary numeric(8,2),
+salary numeric(8,2),    
 primary key(ID),
 foreign key(dept_name) references department);
 desc instructor;
@@ -224,3 +224,9 @@ where instructor.dept_name=department.dept_name and department.budget>80000;
 select distinct instructor.ID,student.ID,instructor.name,student.name
 from instructor,student,advisor
 where s_id = i_id;
+
+/*--natural join of instructor table and teaches table--*/
+
+select name,course_id
+from instructor natural join teaches;
+
