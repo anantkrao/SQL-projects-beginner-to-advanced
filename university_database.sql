@@ -230,3 +230,7 @@ where s_id = i_id;
 select name,course_id
 from instructor natural join teaches;
 
+/*--who teaches who and what - using instructor , student and course table for getting result--*/
+select distinct instructor.name,student.name,title
+from instructor,student,course
+where instructor.dept_name=student.dept_name and instructor.dept_name=course.dept_name;
