@@ -234,3 +234,24 @@ from instructor natural join teaches;
 select distinct instructor.name,student.name,title
 from instructor,student,course
 where instructor.dept_name=student.dept_name and instructor.dept_name=course.dept_name;
+
+/*--RENAMING ATTRIBUTES NAME OF SAME NAME TO AVOID DUPLICATION IN RESULT RELATION--*/
+select instructor.name as instructor , student.name as student, instructor.dept_name
+from instructor,student
+where instructor.dept_name=student.dept_name;
+
+/*--RENAMING LONG RELATION NAME TO MAKE IT SHORT--*/
+select T.name as instructor,S.name as student,T.dept_name
+from instructor T,student S
+where T.dept_name=S.dept_name;
+
+/*--RENAMING LONG RELATION NAME TO MAKE IT SHORT AND USING WITH COMPARISON OPERATORS--*/
+select distinct T.name as instructor,S.name as student,T.dept_name,C.course_id
+from instructor T,student S,course C
+where T.salary >= 86000 and T.dept_name = S.dept_name and T.dept_name = C.dept_name;
+
+/*--RENAMING LONG RELATION NAME TO MAKE IT SHORT AND COMPARE SAME FIELDS WITH EACH OTHER OF SAME RELATION--*/
+select distinct T.name as instructor,T.salary as highsalary
+from instructor T,instructor S 
+where T.salary>S.salary
+order by salary desc;
