@@ -271,7 +271,7 @@ select student.*
 from student
 where name like 'mike%';
 
-/*we can even use not like operator*/
+/*--we can even use not like operator--*/
 
 select 
 *from student
