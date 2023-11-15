@@ -255,3 +255,24 @@ select distinct T.name as instructor,T.salary as highsalary
 from instructor T,instructor S 
 where T.salary>S.salary
 order by salary desc;
+
+/*--STRING OPERATION--*/
+/*--finding characters and words using wildcards--*/
+/*--like operator to find any string--*/
+select T.name as instructor
+from instructor T
+where T.name like '%mark%'; /*-- '%' : matches any substring --*/
+
+select S.*,T.name,C.course_id,C.title
+from student S,instructor T,course C
+where S.name like 'ana%' and S.dept_name = T.dept_name and S.dept_name = C.dept_name ;
+
+select student.* 
+from student
+where name like 'mike%';
+
+/*we can even use not like operator*/
+
+select 
+*from student
+where name not like '%kagdelwar%';
