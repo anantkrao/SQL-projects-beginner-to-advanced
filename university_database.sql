@@ -1,3 +1,10 @@
+/**************************************************************************************
+ *Name : UNIVERSITY DATABASE IN SQL ORACLE.                                           *
+ *Topic : ALL SQL TOPICS ARE INCLUDED.                                                *   
+ *Author : ANANT KAGDELWAR.                                                           *
+ *Level : FOR BEGINNER TO ADVANCED.                                                   *
+ **************************************************************************************/
+
 /*university database*/
 /*schema : 
 department(dept_name (pk), building, budget)
@@ -276,3 +283,40 @@ where name like 'mike%';
 select 
 *from student
 where name not like '%kagdelwar%';
+ 
+ /*--ORDER BY IN SELECT QUERY--*/
+ select ins.*
+ from instructor ins
+ order by salary desc ,  name asc;
+
+ /*--WHERE CLAUSE PREDICATE - 'BETWEEN'--*/
+/*--instead of using '<=' or '>=' in where clause , we can use 'between' comparison operator--*/
+select name,salary
+from instructor
+where salary between 60000 and 80000
+order by salary desc;
+
+/*--we can even use 'not between' operator--*/
+select name,salary
+from instructor
+where salary not between 60000 and 80000
+order by salary desc;
+
+/*--que 1: find the instructor name and courses they taught for all instructor in the mathematics department
+who have taught some courses--*/
+
+select name,course_id,title
+from instructor,course
+where instructor.dept_name=course.dept_name and instructor.dept_name='mathematics';
+
+/*alternative way*/
+select name,course_id,title
+from instructor,course
+where (instructor.dept_name,instructor.dept_name)=(course.dept_name,'mathematics');
+
+/*--SET OPERATIONS--*/
+/*
+1> UNION OPERATION
+2> INTERSECT OPERATION
+3> EXCEPT OPERATION
+*/
