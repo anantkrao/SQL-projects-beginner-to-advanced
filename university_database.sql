@@ -196,6 +196,7 @@ into teaches values(1332,'mat-301','b','fall',2023)
 into teaches values(1342,'mu-401','d','winter',2023)
 into teaches values(1567,'his-501','e','winter',2023)
 select *from teaches;
+
 /*--DISPLAY ALL TABLES ONE BY ONE--*/
 select *from teaches;
 select *from takes; 
@@ -320,3 +321,53 @@ where (instructor.dept_name,instructor.dept_name)=(course.dept_name,'mathematics
 2> INTERSECT OPERATION
 3> EXCEPT OPERATION
 */
+
+/*--set one : course_id in fall semester--*/
+select course_id
+from section 
+where semester='fall'
+and year = 2023;
+
+/*--set two : course_id in summer semester--*/
+select course_id
+from section 
+where semester='summer'
+and year = 2023;
+
+/*--UNION OPERATION BETWEEN SET ONE AND SET TWO--*/
+(select course_id
+from section 
+where semester='fall'
+and year = 2023
+)
+UNION
+(select course_id
+from section 
+where semester='winter'
+and year = 2023);
+/*--INSERT SOME DATA INTO COURSE TABLE FOR BETTER UNDERSTANDING
+ OF INTERSECT OPERATION--*/
+
+insert into course values('cs-133','quantum computers','computer science',4);
+insert into course values('cs-132','computer architecture','computer science',4);
+insert into course values('mat-302','algebra','mathematics',4);
+insert into course values('phy-205','electrical','physics',3);
+insert into course values('cs-138','electrical','computer science',3);
+
+/*--INTERSECT OPERATION--*/
+(select title 
+from course
+where dept_name='computer science')
+intersect
+(select title
+from course
+where dept_name='physics');
+
+/*--EXCEPT OPERATION--*/
+(select title 
+from course
+where dept_name='computer science')
+EXCEPT
+(select title
+from course
+where dept_name='physics');
