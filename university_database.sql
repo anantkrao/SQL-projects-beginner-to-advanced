@@ -371,3 +371,9 @@ EXCEPT
 (select title
 from course
 where dept_name='physics');
+
+/*--NULL VALUES : VALUE THAT IS UNKNOWN OR WHEN FIELD IS BALNK.--*/
+/*--'NULL' KEYWORD --*/
+select name from instructor where salary is null;
+
+select name from instructor where salary is not null;
