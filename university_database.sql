@@ -1,5 +1,5 @@
 /**************************************************************************************
- *Name : UNIVERSITY DATABASE IN SQL ORACLE.                                           *
+ *Name : UNIVERSITY DATABASE IN SQL ORACLE JUST FOR LEARNING BASICS OF SQL.           *
  *Topic : ALL SQL TOPICS ARE INCLUDED.                                                *   
  *Author : ANANT KAGDELWAR.                                                           *
  *Level : FOR BEGINNER TO ADVANCED.                                                   *
@@ -377,3 +377,79 @@ where dept_name='physics');
 select name from instructor where salary is null;
 
 select name from instructor where salary is not null;
+
+/*--
+AGGREGATE FUNCTIONS :
+DEFINITION : functions that takes set of values as input and return single value as output.
+TYPES : sql offers 5 built-in aggregate function.
+1>total : sum
+2>avg
+3>count
+4>max
+5>min
+--*/
+
+/*--QUERY 1 : find the average salary of instructors in the computer science department.--*/  
+select avg(salary)
+from instructor
+where dept_name='computer science';
+
+/*or*/
+select avg(salary) as avg_salary
+from instructor
+where dept_name='computer science';
+
+/*--QUERY 2 : find the total number of instructor who teaches in winter 2023 semester.--*/
+select count(distinct id) as total_instructor
+from teaches
+where semester='winter' and year = 2023; 
+
+/*--QUERY 3 : find number of tuple in course relation.--*/
+select count(*)
+from course;
+
+/*--QUERY 4: Find the number of instructors who teaches in summer semester 2023.--*/
+select count(name) as total_instructor
+from instructor,teaches
+where instructor.id=teaches.id
+and semester='summer' and year = 2023;
+
+/*--AGGREGATION WITH GROUPING--*/
+/*
+There will be some circumstances where we want to use aggregation with group of sets of tuple 
+like name,salary together. So we use "group by" clause following "column name".
+
+syntax : group by dept_name;
+
+For better understanding let's make insertion operation in instructor table to make meaningfull
+"group by" queries.
+*/
+
+/*insert some entries into instructor table again*/
+insert into instructor values(1221,'bill gates','computer science',95000);
+insert into instructor values(1090,'sakuntala','mathematics',83000);
+insert into instructor values(1231,'hans zimmer','music',87000);
+insert into instructor values(1545,'vikas','history',67000);
+select *from instructor;
+
+/*perform group by query*/
+/*QUERY 5 : Find the avg salary in each department with name specifying.*/
+select dept_name,avg(salary) as avg_salary
+from instructor
+group by dept_name;
+
+/*QUERY 6 : Find the number of instructors in each department who teach a course in the
+WINTER 2023 semester.*/
+select dept_name,count(distinct id) as instructor_count
+from instructor natural join teaches
+where semester ='winter' and year=2023
+group by dept_name;
+
+/*-- HAVING clause : having clause is useful to state a condition that applies to group rather 
+than to tuples.*/
+
+/*QUERY 7 : find those departments where average salary of instructor is higher than 65000.*/
+select dept_name,avg(salary) as avg_salary
+from instructor
+group by dept_name
+having salary > 65000;
