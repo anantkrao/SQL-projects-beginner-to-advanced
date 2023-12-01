@@ -321,11 +321,22 @@ to_char(delydate,'month') as delivery_month,
 to_date(delydate,'yyyy-mm-dd') as delivery_date
 from salesorder;
 
-/*Query 6 c : */
+/*Query 6 c : list the OrderDate in the formate ‘DD-MONTH-YY’. Eg 12-feb-02.*/
 
-/*Query 6 d : */
+select orderno,to_date(orderdate,'dd-mm-yy') as order_date
+from salesorder;
 
-/*Query 7 a : */
+/*Query 6 d : list the date, 15 days after today’s date.*/
+
+select sysdate as current_date, sysdate + 15 as date_15_days_later
+from dual;
+
+/*Query 7 a :print the description and total qty sold for each product. */
+
+select pm.description as product ,
+sum(distinct sod.qtydisp) as sold_quantity 
+from product_master pm natural join sales_order_details sod
+group by description;
 
 /*Query 7 b : */
 
